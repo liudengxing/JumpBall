@@ -1,19 +1,15 @@
 package Ball;
 
-import javax.swing.JFrame;
-        import javax.swing.JPanel;
-        import javax.swing.Timer;
-        import java.awt.Dimension;
-        import java.awt.Image;
-        import java.awt.Graphics;
-        import java.awt.Color;
-        import java.awt.event.KeyAdapter;
-        import java.awt.event.KeyListener;
-        import java.awt.event.KeyEvent;
-        import java.awt.event.ActionListener;
-        import java.awt.event.ActionEvent;
-        import java.io.IOException;
-        import java.awt.event.MouseListener;
+import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.IOException;
+import java.awt.event.MouseListener;
+import java.security.Key;
+import java.util.TimerTask;
 
 /**
  * 游戏界面
@@ -34,6 +30,24 @@ public class BallFrame extends JFrame {
     private BallService service = null;
     // 定义一个timer
     Timer timer = null;
+    int value_x ;
+
+    public void Mouse_info() {
+        try {
+            int x;
+            BallFrame info_frame = new BallFrame();
+            java.util.Timer timer = new java.util.Timer();
+            timer.schedule(new TimerTask() {
+                public void run() {
+                    Point point = java.awt.MouseInfo.getPointerInfo().getLocation();
+                    System.out.println(point.x);
+                    value_x = (point.x);
+                }
+            }, 100, 100);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * 默认构造器
@@ -81,22 +95,22 @@ public class BallFrame extends JFrame {
             timer.start();
         }
 
+        service.SetStickPoseMouse(value_x);
+
         this.add(ballPanel);
-        // 增加事件监听器
+
         KeyListener[] klarr = this.getKeyListeners();
         if (klarr.length == 0) {
-            // 定义键盘监听适配器
+
             KeyListener keyAdapter = new KeyAdapter() {
                 public void keyPressed(KeyEvent ke) {
-                    // 改变档板的坐标
-                    //service.setStickPos(ke);
+
+                   // service.setStickPos(value_x);
                 }
             };
             this.addKeyListener(keyAdapter);
         }
-    }
-
-    /**
+    }    /**
      * 获取画板
      *
      * @return BallPanel 返回BallPanle

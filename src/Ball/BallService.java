@@ -1,15 +1,25 @@
 package Ball;
 
-import java.awt.event.KeyEvent;
 import java.awt.Image;
 import java.awt.Graphics;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.io.IOException;
-import java.awt.event.MouseEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.Point;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.awt.Color;
 
 /**
  * 处理游戏逻辑的对象
@@ -63,7 +73,7 @@ public class BallService {
 		stick = new Stick(width, height, "img/stick.jpg");
 		// 创建一个弹球的实例
 		ball = new Ball(width, height, stick.getImage().getHeight(null),
-				"img/ball.gif");
+				"img/ball.png");
 		// 游戏结束图片
 		gameOver = new BallComponent("img/over.gif");
 		// 赢图片
@@ -90,7 +100,7 @@ public class BallService {
 	 * @param ke
 	 *            KeyEvent 键盘事件
 	 * @return void
-
+*/
 	public void setStickPos(KeyEvent ke) {
 		// 把弹球的运动状态设为true
 		ball.setStarted(true);
@@ -119,27 +129,14 @@ public class BallService {
 			}
 		}
 	}
-     */
 
     /**
      * 鼠标事件
      */
-	static class MovableMessagePanel extends JPanel {
-		private String message = "Welcome to java";
-		private int x = 20;
-		private int y = 20;
-
-		public MovableMessagePanel(String s) {
-			message = s;
-			addMouseMotionListener(new MouseMotionAdapter() {
-				public void mouseDragged(MouseEvent e) {
-					x = e.getX();
-					y = e.getY();
-					repaint();
-				}
-			});
-		}
-	}
+    public void SetStickPoseMouse(int x){
+        ball.setStarted(true);
+        stick.setX(x);
+    }
 
 	/**
 	 * 设置小球图片的位置
