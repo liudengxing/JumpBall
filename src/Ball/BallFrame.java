@@ -32,7 +32,7 @@ public class BallFrame extends JFrame {
     Timer timer = null;
     int value_x ;
 
-    public void Mouse_info() {
+    public void Mose_info() {
         try {
             int x;
             BallFrame info_frame = new BallFrame();
@@ -40,7 +40,8 @@ public class BallFrame extends JFrame {
             timer.schedule(new TimerTask() {
                 public void run() {
                     Point point = java.awt.MouseInfo.getPointerInfo().getLocation();
-                    System.out.println(point.x);
+                    //输出鼠标坐标
+                    //System.out.println(point.x);
                     value_x = (point.x);
                 }
             }, 100, 100);
@@ -82,6 +83,8 @@ public class BallFrame extends JFrame {
                 service.run();
                 // 刷新画板
                 ballPanel.repaint();
+                //设置鼠标位置
+                service.SetStickPoseMouse(value_x);
             }
         };
         // 如果timer不为空
@@ -95,7 +98,7 @@ public class BallFrame extends JFrame {
             timer.start();
         }
 
-        service.SetStickPoseMouse(value_x);
+
 
         this.add(ballPanel);
 
@@ -105,7 +108,7 @@ public class BallFrame extends JFrame {
             KeyListener keyAdapter = new KeyAdapter() {
                 public void keyPressed(KeyEvent ke) {
 
-                   // service.setStickPos(value_x);
+                   service.setStickPos(ke);
                 }
             };
             this.addKeyListener(keyAdapter);

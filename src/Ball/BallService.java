@@ -133,9 +133,9 @@ public class BallService {
     /**
      * Êó±êÊÂ¼þ
      */
-    public void SetStickPoseMouse(int x){
+    public void SetStickPoseMouse(int Position){
         ball.setStarted(true);
-        stick.setX(x);
+        stick.setX(Position);
     }
 
 	/**
